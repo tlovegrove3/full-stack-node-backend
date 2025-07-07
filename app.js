@@ -1,8 +1,11 @@
 //setup.. this is similar to how we do html tags
 
 const express = require ("express")
+//we have to use cors in order to host a front end and back and on the same device
+var cors = require("cors")
 //activate or tell this app variable to be an express server
 const app = express()
+app.use(cors())
 const router = express.Router()
 
 
