@@ -5,7 +5,7 @@ const songSchema = new mongoose.Schema({
   artist: { type: String, required: true },
   popularity: { type: Number, min: 1, max: 10 },
   releaseDate: { type: Date, default: Date.now },
-  genre: [String],
+  genre: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

@@ -64,12 +64,22 @@ router.post("/", async (req, res) => {
       });
     }
 
+    // Validate and process genre array
+    let processedGenre = [];
+    if (Array.isArray(genre)) {
+      processedGenre = genre
+        .filter((g) => g && typeof g === "string")
+        .map((g) => g.trim());
+    } else if (typeof genre === "string" && genre.trim()) {
+      processedGenre = [genre.trim()];
+    }
+
     const newSong = new Song({
       title: title.trim(),
       artist: artist.trim(),
       popularity: popularity,
       releaseDate: releaseDate,
-      genre: genre.map((g) => g.trim()),
+      genre: processedGenre,
       createdAt: createdAt,
       updatedAt: updatedAt,
     });
