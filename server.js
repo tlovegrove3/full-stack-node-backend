@@ -13,8 +13,9 @@ app.use(cors());
 app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
 
-// Routes
 app.use("/api/songs", require("./routes/songs"));
+app.use("/api/user", require("./routes/user"));
+app.use("/api/user/login", require("./routes/user"));
 
 // Health check route
 app.get("/", (req, res) => {
@@ -24,6 +25,8 @@ app.get("/", (req, res) => {
     status: "healthy",
     endpoints: {
       songs: "/api/songs",
+      user: "/api/user",
+      login: "/api/user/login",
     },
   });
 });
@@ -44,7 +47,7 @@ app.use((err, req, res, next) => {
 app.all("*songs", (req, res) => {
   res.status(404).json({
     error: "Route not found",
-    availableRoutes: ["/api/songs"],
+    availableRoutes: ["/api/songs", "/api/user", "/api/user/login"],
   });
 });
 
